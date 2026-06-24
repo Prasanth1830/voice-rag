@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: rag-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../chroma_db:/app/chroma_db   # Persist ChromaDB data
+    env_file:
+      - ../.env
+    environment:
+      - CHROMA_PERSIST_DIR=/app/chroma_db
+    restart: unless-stopped
+
+  dashboard:
+    image: node:20-alpine
+    container_name: rag-dashboard
+    working_dir: /app
+    command: sh -c "npm install && npm run dev -- --host"
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../dashboard:/app
+    environment:
+      - VITE_API_URL=http://localhost:8000
+    depends_on:
+      - api
+    restart: unless-stopped
