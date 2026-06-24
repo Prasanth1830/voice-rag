@@ -40,7 +40,7 @@ class TestDocumentProcessor:
 
     def test_unsupported_type_raises(self):
         with pytest.raises(ValueError, match="Unsupported"):
-            self.processor.process(b"\x00\x01\x02binary", "file.bin")
+            self.processor.process(b"\xff\xff\xffbinary", "file.bin")
 
     def test_deduplication_via_hash(self):
         content = b"Same content " * 20

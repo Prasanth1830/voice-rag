@@ -1,6 +1,6 @@
-# 🧠 RAG Voice Boilerplate
+# 🧠 RAG Voice
 
-> A production-ready Python + React boilerplate for building **Retrieval-Augmented Generation (RAG)** applications with **cross-encoder re-ranking**, **voice query support**, and a stunning **Admin Dashboard**.
+> A production-ready Python + React application for building **Retrieval-Augmented Generation (RAG)** applications with **cross-encoder re-ranking**, **voice query support**, and a stunning **Admin Dashboard**.
 
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?style=flat-square&logo=fastapi)](https://fastapi.tiangolo.com)
 [![React](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react)](https://react.dev)
@@ -112,8 +112,8 @@ The dashboard proxies all `/api/*` calls to the FastAPI backend, so no CORS issu
 ### 1. Clone & configure
 
 ```bash
-git clone https://github.com/Prasanth1830/rag-voice-boilerplate.git
-cd rag-voice-boilerplate
+git clone https://github.com/Prasanth1830/voice-rag.git
+cd voice-rag
 cp .env.example .env
 # Edit .env and add your OPENAI_API_KEY at minimum
 ```

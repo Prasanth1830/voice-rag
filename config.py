@@ -10,7 +10,7 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     # ── App ───────────────────────────────────────────────────────────────
-    APP_NAME: str = "RAG Voice Boilerplate"
+    APP_NAME: str = "RAG Voice"
     APP_VERSION: str = "2.0.0"
     DEBUG: bool = False
     HOST: str = "0.0.0.0"

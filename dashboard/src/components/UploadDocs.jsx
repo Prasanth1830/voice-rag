@@ -50,8 +50,20 @@ export default function UploadDocs({ onUploadSuccess, addToast }) {
       formData.append('file', queue[i].file)
 
       try {
-        const res = await fetch(`${API}/upload`, { method: 'POST', body: formData })
-        const data = await res.json()
+        let res
+        try {
+          res = await fetch(`${API}/upload`, { method: 'POST', body: formData })
+        } catch {
+          throw new Error('Cannot reach backend — is the API server running on port 8000?')
+        }
+
+        let data
+        try {
+          data = await res.json()
+        } catch {
+          throw new Error(`Server error (status ${res.status}) — check that the API is running`)
+        }
+
         if (!res.ok) throw new Error(data.detail || 'Upload failed')
 
         setQueue(prev => prev.map((item, idx) =>
@@ -62,7 +74,7 @@ export default function UploadDocs({ onUploadSuccess, addToast }) {
         setQueue(prev => prev.map((item, idx) =>
           idx === i ? { ...item, status: 'error', error: err.message } : item
         ))
-        addToast?.(`Failed: ${queue[i].file.name}`, 'error')
+        addToast?.(`Failed: ${queue[i].file.name} — ${err.message}`, 'error')
       }
     }
     setUploading(false)
